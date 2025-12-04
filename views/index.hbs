@@ -3,51 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+            font-family: "Arial", sans-serif;
+            background: linear-gradient(#b30000, #4d0000);
+            color: #fff;
+            padding: 40px;
+            margin: 0;
+            overflow-x: hidden;
         }
+
         h1 {
-            margin-bottom: 20px;
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 35px;
+            color: #fffbea;
+            text-shadow: 0 0 10px gold;
         }
+
         .song-card {
-            border: 1px solid #ccc;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border-left: 6px solid gold;
+            padding: 15px;
+            margin: 20px auto;
+            width: 65%;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+            transition: transform 0.25s ease-in-out;
         }
+
+        .song-card:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
+        }
+
         .song-title {
+            font-size: 24px;
             font-weight: bold;
-            font-size: 18px;
+            color: #fff;
         }
+
         .song-artist {
-            color: #555;
+            font-size: 18px;
+            color: #ffefc0;
+        }
+
+        /* Snow animation */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 18px;
+            user-select: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Song List</h1>
+    <h1>🎄 Christmas Song List 🎄</h1>
 
-    {{! Show message if there are no songs }}
-    {{#unless songsList}}
-        <p>No songs found.</p>
-    {{/unless}}
+    {{!-- Snowflakes --}}
+    <script>
+        const snowContainer = document.body;
+
+        for (let i = 0; i < 35; i++) {
+            const snow = document.createElement("div");
+            snow.className = "snowflake";
+            snow.innerHTML = "❄";
+
+            snow.style.left = Math.random() * 100 + "vw";
+            snow.style.animationDuration = 4 + Math.random() * 6 + "s";
+            snow.style.opacity = 0.4 + Math.random();
+
+            snowContainer.appendChild(snow);
+        }
+    </script>
 
     {{!-- Loop through songs --}}
     {{#each songsList}}
         <div class="song-card">
             <div class="song-title">{{this.title}}</div>
-            <div class="song-artist">{{this.artist}}</div>
-
-            {{#if this.genre}}
-                <div>Genre: {{this.genre}}</div>
-            {{/if}}
-
-            {{#if this.year}}
-                <div>Year: {{this.year}}</div>
-            {{/if}}
+            
         </div>
     {{/each}}
 
