@@ -7,11 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+// Load environment variables
+require('dotenv').config();
+
 // Connect to MongoDB Atlas using Mongoose
 const mongoose = require("mongoose"); // import mongoose
 
 mongoose
-  .connect("mongodb+srv://pedrotroncosojimenez02_db_user:1ikkPv1t5hHiQf6n@cluster0.0ytdzox.mongodb.net/storedListDB")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB Atlas");
   })
