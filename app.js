@@ -18,7 +18,7 @@ mongoose
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
   });
-  
+
 var app = express();
 
 // view engine setup
