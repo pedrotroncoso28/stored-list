@@ -7,6 +7,18 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+// Connect to MongoDB Atlas using Mongoose
+const mongoose = require("mongoose"); // import mongoose
+
+mongoose
+  .connect("mongodb+srv://pedrotroncosojimenez02_db_user:1ikkPv1t5hHiQf6n@cluster0.0ytdzox.mongodb.net/storedListDB")
+  .then(() => {
+    console.log("Connected to MongoDB Atlas");
+  })
+  .catch((err) => {
+    console.log("Error connecting to MongoDB:", err);
+  });
+  
 var app = express();
 
 // view engine setup
