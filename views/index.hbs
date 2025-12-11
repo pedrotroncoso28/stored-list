@@ -84,6 +84,96 @@
                 transform: translateY(110vh);
             }
         }
+        .add-form {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .add-input {
+            padding: 12px;
+            width: 250px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .add-btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: gold;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎄 Christmas Song List 🎄</h1>
+
+    {{!-- Add Song Form --}}
+    <div class="add-form">
+        <form action="/add" method="POST">
+            <input type="text" name="title" placeholder="Add a song..." required class="add-input">
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+    </div>
+
+    {{!-- Snowflakes --}}
+    <script>
+        const snowContainer = document.body;
+
+        for (let i = 0; i < 35; i++) {
+            const snow = document.createElement("div");
+            snow.className = "snowflake";
+            snow.innerHTML = "❄";
+
+            snow.style.left = Math.random() * 100 + "vw";
+            snow.style.animationDuration = 4 + Math.random() * 6 + "s";
+            snow.style.opacity = 0.4 + Math.random();
+
+            snowContainer.appendChild(snow);
+        }
+    </script>
+
+    {{!-- Loop through songs --}}
+    {{#each songsList}}
+        <div class="song-card">
+            <div class="song-title">{{this.title}}</div>
+
+            <form action="/delete/{{this._id}}" method="POST" style="margin-top:10px;">
+                <button type="submit" style="
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    border: none;
+                    background: #ff4d4d;
+                    color: white;
+                    cursor: pointer;
+                    font-weight: bold;
+                ">
+                    Delete
+                </button>
+            </form>
+
+            <form action="/edit/{{this._id}}" method="GET" style="margin-top:10px;">
+                <button type="submit" style="
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    border: none;
+                    background: #ffd700;
+                    color: black;
+                    cursor: pointer;
+                    font-weight: bold;
+                ">
+                    Edit
+                </button>
+            </form>
+        </div>
+    {{/each}}
+
+</body>
+</html>
+
+
     </style>
 </head>
 <body>
