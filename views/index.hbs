@@ -44,49 +44,11 @@
             font-weight: bold;
             color: #fff;
         }
-
-        /* FORM STYLING */
+        
         .add-form {
             width: 65%;
             margin: 0 auto 40px auto;
             text-align: center;
-        }
-
-        .add-form input {
-            padding: 12px;
-            width: 60%;
-            border-radius: 10px;
-            border: none;
-        }
-
-        .add-form button {
-            padding: 12px 18px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 10px;
-            background: gold;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Snow animation */
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            color: white;
-            font-size: 18px;
-            user-select: none;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(110vh);
-            }
-        }
-        .add-form {
-            text-align: center;
-            margin-bottom: 40px;
         }
 
         .add-input {
@@ -103,14 +65,30 @@
             border: none;
             cursor: pointer;
             font-weight: bold;
+    }
+
+        /* Snow animation */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 18px;
+            user-select: none;
+            animation: fall linear infinite;
         }
-    </style>
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+        </style>
 </head>
 <body>
 
     <h1>🎄 Christmas Song List 🎄</h1>
 
-    {{!-- Add Song Form --}}
+    {{!-- Add form --}}
     <div class="add-form">
         <form action="/add" method="POST">
             <input type="text" name="title" placeholder="Add a song..." required class="add-input">
@@ -135,7 +113,7 @@
         }
     </script>
 
-    {{!-- Loop through songs --}}
+    {{!-- Song list --}}
     {{#each songsList}}
         <div class="song-card">
             <div class="song-title">{{this.title}}</div>
@@ -148,8 +126,7 @@
                     background: #ff4d4d;
                     color: white;
                     cursor: pointer;
-                    font-weight: bold;
-                ">
+                    font-weight: bold;">
                     Delete
                 </button>
             </form>
@@ -162,53 +139,11 @@
                     background: #ffd700;
                     color: black;
                     cursor: pointer;
-                    font-weight: bold;
-                ">
+                    font-weight: bold;">
                     Edit
                 </button>
             </form>
         </div>
     {{/each}}
-
-</body>
-</html>
-
-
-    </style>
-</head>
-<body>
-
-    <h1>🎄 Christmas Song List 🎄</h1>
-
-    {{!-- Add Song Form --}}
-    <form class="add-form" action="/add" method="POST">
-        <input type="text" name="title" placeholder="Add a new song..." required>
-        <button type="submit">Add</button>
-    </form>
-
-    {{!-- Snowflakes --}}
-    <script>
-        const snowContainer = document.body;
-
-        for (let i = 0; i < 35; i++) {
-            const snow = document.createElement("div");
-            snow.className = "snowflake";
-            snow.innerHTML = "❄";
-
-            snow.style.left = Math.random() * 100 + "vw";
-            snow.style.animationDuration = 4 + Math.random() * 6 + "s";
-            snow.style.opacity = 0.4 + Math.random();
-
-            snowContainer.appendChild(snow);
-        }
-    </script>
-
-    {{!-- Loop through songs --}}
-    {{#each songsList}}
-        <div class="song-card">
-            <div class="song-title">{{this.title}}</div>
-        </div>
-    {{/each}}
-
-</body>
+    </body>
 </html>
