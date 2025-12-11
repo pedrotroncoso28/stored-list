@@ -7,20 +7,19 @@ var router = express.Router();
 const Song = require('../models/songs'); 
 
 /* GET home page. */
+// POST - Add new item
 router.post('/item', async function(req, res) {
   try {
-    const { title } = req.body;
+    // Read form data
+    const title = req.body.title;
 
-    // Create a new item in MongoDB
-    const newItem = await Song.create({ title });
+    // Create and save new song
+    await Song.create({ title });
 
-    res.status(201).json({
-      message: "Item added successfully",
-      item: newItem
-    });
-
+    // Redirect back to the homepage
+    res.redirect('/');
   } catch (err) {
-    console.error("Error adding item:", err);
-    res.status(500).json({ error: "Failed to add item" });
+    console.error('Error adding item:', err);
+    res.status(500).send('Error adding item');
   }
-})
+});
