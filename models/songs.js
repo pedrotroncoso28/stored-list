@@ -3,8 +3,9 @@
 const mongoose = require("mongoose");
 
 const songSchema = new mongoose.Schema({
-  title: String,
-}, { collection: 'songs' });
-
-// export the model
+  title: {
+    type: String,
+    required: true
+  }
+}, { collection: 'songs' }); 
 module.exports = mongoose.model("Song", songSchema);

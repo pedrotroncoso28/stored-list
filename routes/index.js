@@ -7,21 +7,20 @@ var router = express.Router();
 const Song = require('../models/songs'); 
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
+router.post('/item', async function(req, res) {
   try {
-    // Fetch all songs from MongoDB
-    const songs = await Song.find();
+    const { title } = req.body;
 
-    // Render index view and pass songs data
-    res.render('index', { 
-      title: 'My Song List',
-      songsList: songs 
+    // Create a new item in MongoDB
+    const newItem = await Song.create({ title });
+
+    res.status(201).json({
+      message: "Item added successfully",
+      item: newItem
     });
 
   } catch (err) {
-    console.error('Error fetching songs:', err);
-    res.status(500).send('Error fetching songs');
+    console.error("Error adding item:", err);
+    res.status(500).json({ error: "Failed to add item" });
   }
-});
-
-module.exports = router;
+})
