@@ -45,9 +45,28 @@
             color: #fff;
         }
 
-        .song-artist {
-            font-size: 18px;
-            color: #ffefc0;
+        /* FORM STYLING */
+        .add-form {
+            width: 65%;
+            margin: 0 auto 40px auto;
+            text-align: center;
+        }
+
+        .add-form input {
+            padding: 12px;
+            width: 60%;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .add-form button {
+            padding: 12px 18px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 10px;
+            background: gold;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         /* Snow animation */
@@ -71,6 +90,12 @@
 
     <h1>🎄 Christmas Song List 🎄</h1>
 
+    {{!-- Add Song Form --}}
+    <form class="add-form" action="/add" method="POST">
+        <input type="text" name="title" placeholder="Add a new song..." required>
+        <button type="submit">Add</button>
+    </form>
+
     {{!-- Snowflakes --}}
     <script>
         const snowContainer = document.body;
@@ -92,7 +117,6 @@
     {{#each songsList}}
         <div class="song-card">
             <div class="song-title">{{this.title}}</div>
-            
         </div>
     {{/each}}
 

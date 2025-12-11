@@ -2,24 +2,24 @@
 
 var express = require('express');
 var router = express.Router();
+const Song = require("../models/songs");
 
-// Import my Song model
-const Song = require('../models/songs'); 
-
-/* GET home page. */
-// POST - Add new item
-router.post('/item', async function(req, res) {
-  try {
-    // Read form data
-    const title = req.body.title;
-
-    // Create and save new song
-    await Song.create({ title });
-
-    // Redirect back to the homepage
-    res.redirect('/');
-  } catch (err) {
-    console.error('Error adding item:', err);
-    res.status(500).send('Error adding item');
-  }
+/* GET home page */
+router.get('/', async (req, res) => {
+  const songs = await Song.find();
+  res.render('index', { 
+    title: 'Christmas Song List',
+    songsList: songs
+  });
 });
+
+/* POST: add new song */
+router.post("/add", async (req, res) => {
+  const newTitle = req.body.title;
+
+  await Song.create({ title: newTitle });
+
+  res.redirect("/");
+});
+
+module.exports = router;
